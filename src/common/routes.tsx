@@ -1,8 +1,9 @@
-import { createBrowserRouter } from 'react-router-dom';
-import ErrorPage from '../components/ErrorPage';
-import Welcome from '../pages/Welcome/Welcome';
-import GitHubUser, { loader as userLoader } from '../pages/GitHubUser/GitHubUser';
+import { createBrowserRouter, redirect } from 'react-router-dom';
+import ErrorPage from '../pages/Error/ErrorPage';
+import WelcomePage, { loader as welcomeLoader } from '../pages/WelcomePage';
+import GitHubUserPage, { loader as userLoader } from '../pages/GitHubUserPage';
 import Main from '../components/Main';
+import GitHubUserErrorPage from '../pages/Error/GitHubUserErrorPage';
 
 export const router = createBrowserRouter([
   {
@@ -12,13 +13,19 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Welcome/>,
+        loader: welcomeLoader,
+        element: <WelcomePage/>,
       },
       {
         path: 'users/:id',
         loader: userLoader,
-        element: <GitHubUser/>
+        element: <GitHubUserPage/>,
+        errorElement: <GitHubUserErrorPage/>,
       },
+      {
+        path: '*',
+        loader: () => redirect('/')
+      }
     ]
   },
 ]);

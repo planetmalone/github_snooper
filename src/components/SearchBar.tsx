@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FC, useState } from 'react';
+import { ChangeEventHandler, FC } from 'react';
 import { FaSearch } from 'react-icons/fa';
 
 export interface SearchBarProps {
@@ -6,24 +6,28 @@ export interface SearchBarProps {
   onUpdate: (value: string) => void;
 }
 
-const SearchBar: FC<SearchBarProps> = () => {
-  const [search, setSearch] = useState<string>('');
+const SearchBar: FC<SearchBarProps> = ({
+  value,
+  onUpdate,
+}) => {
 
-  const handleSearchUpdate: ChangeEventHandler<HTMLInputElement> = (event) => setSearch(event.target.value);
+  const handleSearchUpdate: ChangeEventHandler<HTMLInputElement> = (event) => onUpdate(event.target.value);
 
   return (
-      <>
-        <div className="relative shadow">
-          <FaSearch className="absolute top-1/2 left-2 -translate-y-1/2 text-zinc-50" />
-          <input
-              className="p-2 pl-8 text-sm rounded bg-zinc-600 text-zinc-50 hover:bg-zinc-500 focus:text-white"
-              type="text"
-              value={search}
-              onChange={handleSearchUpdate}
-              placeholder="Search..."
-          />
-        </div>
-      </>
+    <div className="w-full pl-4 pr-8">
+      <div className="relative shadow">
+        <FaSearch className="absolute top-1/2 left-2 -translate-y-1/2 text-zinc-600 dark:text-zinc-400"/>
+        <label className="sr-only">User Search</label>
+        <input
+          id="user-search"
+          className="w-full p-2 pl-8 rounded border-2 border-blue-500 bg-transparent text-sm focus-visible:outline outline-blue-500 focus-visible:border-blue-500"
+          type="text"
+          value={value}
+          onChange={handleSearchUpdate}
+          placeholder="Search..."
+        />
+      </div>
+    </div>
   );
 };
 
