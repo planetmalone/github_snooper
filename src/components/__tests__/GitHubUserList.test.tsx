@@ -14,7 +14,7 @@ describe('GitHubUserList', () => {
         wrapper: BrowserRouter
       }
     );
-    screen.getAllByRole('link').forEach(link => userEvent.click(link));
+    screen.getAllByRole('button').forEach(button => userEvent.click(button));
 
     expect(screen.getAllByRole('listitem').length).toEqual(2);
     expect(handleSelection).toHaveBeenCalledTimes(2);

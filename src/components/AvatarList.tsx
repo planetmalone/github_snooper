@@ -12,9 +12,14 @@ export interface Avatar {
 }
 
 const AvatarList: FC<AvatarListProps> = memo(({ avatars }) => (
-  <div className="flex">
+  <div className="avatar-list flex">
     {avatars.map(avatar => (
-      <a className="ml-2" href={avatar.url} key={avatar.id} title={avatar.login}>
+      <a
+        className="ml-2"
+        href={avatar.url}
+        title={avatar.login}
+        key={avatar.id}
+      >
         <img
           className="max-w-[40px] rounded"
           src={avatar.avatarUrl}

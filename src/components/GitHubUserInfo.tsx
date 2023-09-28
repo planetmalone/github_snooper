@@ -7,7 +7,9 @@ export interface GitHubUserInfoProps {
 }
 
 const GitHubUserInfo: FC<GitHubUserInfoProps> = memo(({ user }) => (
-  <div className="flex p-8 bg-gradient-to-bl from-zinc-100 bg-zinc-200 dark:from-zinc-800 dark:bg-zinc-900 shadow">
+  <div id="github-user-details"
+       className="flex p-8 bg-gradient-to-bl from-zinc-100 bg-zinc-200 dark:from-zinc-800 dark:bg-zinc-900 shadow"
+  >
     <div className="flex-1 flex flex-col justify-around">
       <img
         className="rounded-full w-full max-w-[192px] max-h-[192px] mb-4"

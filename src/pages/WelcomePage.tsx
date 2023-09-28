@@ -14,7 +14,7 @@ const WelcomePage = () => {
   const users = useLoaderData() as GitHubUserSummary[];
 
   return (
-      <div className="flex flex-col items-center p-4 h-screen bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50">
+      <div className="flex flex-col items-center p-4 min-h-screen bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50">
         <h1 className="text-center text-3xl mt-24 mb-16">Welcome to GitHub Snooper</h1>
         <p className="mb-8 max-w-screen-md">
           Ever wanted to snoop on your favorite GitHubbers from outside of{' '}

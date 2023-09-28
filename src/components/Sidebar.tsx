@@ -8,9 +8,13 @@ export interface SidebarProps {
 }
 
 const Sidebar: FC<SidebarProps> = ({ onUserSelection }) => {
-  const [searchParams] = useSearchParams();
-  const [search, setSearch] = useState<string>(searchParams.get('q') ?? '');
+  const [search, setSearch] = useState<string>('');
   const [users, fetchResults] = useSearchForUsers();
+
+  useEffect(() => {
+    const currentSearchParams = new URLSearchParams(window.location.search);
+    setSearch(currentSearchParams.get('q') ?? '');
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -20,9 +24,9 @@ const Sidebar: FC<SidebarProps> = ({ onUserSelection }) => {
   }, [search, fetchResults]);
 
   const handleSearchUpdate = (value: string) => {
-    const q = searchParams.get('q');
-    // Using setQueryParams from useSearchParams triggers a rerender of the entire route tree. This causes some weird side effects.
-    // Instead, we use replaceState to update the query parameter
+    // Using setQueryParams would be more elegant, but it triggers a rerender of the entire route tree causing side effects.
+    const currentSearchParams = new URLSearchParams(window.location.search);
+    const q = currentSearchParams.get('q');
     if (q === null || q !== value) {
       const url = new URL(window.location.href);
       url.searchParams.set('q', value);
@@ -33,6 +37,7 @@ const Sidebar: FC<SidebarProps> = ({ onUserSelection }) => {
 
   return (<>
     <div
+      id="sidebar"
       className="w-full h-full flex flex-col items-center pt-12 bg-gradient-to-tl from-zinc-100 bg-zinc-200 dark:from-zinc-800 dark:bg-zinc-900">
       <SearchBar value={search} onUpdate={handleSearchUpdate}/>
       <GitHubUserList users={users} onSelection={onUserSelection}/>

@@ -1,8 +1,7 @@
 import { FC, memo } from 'react';
-import Link from '../components/Link';
 import { DisplayMode } from '../common/types/Display';
 import { GitHubUserSummary } from '../common/types/GitHub';
-import { useLocation } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 export interface SummaryCardProps {
   user: GitHubUserSummary;
@@ -25,7 +24,12 @@ const SummaryCard: FC<SummaryCardProps> = memo(({
   mode = DisplayMode.Light,
   onOpen = () => {},
 }) => {
-  const { search } = useLocation();
+  const navigate = useNavigate();
+
+  const handleSelection = () => {
+    onOpen();
+    navigate(`/users/${login}${window.location.search}`);
+  };
 
   const cardStyles = `flex items-center w-full p-2 rounded shadow-lg shadow border text-blue-500 ${BaseStyles.card[mode]}`;
 
@@ -37,13 +41,13 @@ const SummaryCard: FC<SummaryCardProps> = memo(({
         alt={`${login}'s avatar.`}
         title={`GitHub user: ${login}`}
       />
-      <Link
-        to={`/users/${login}${search}`}
+      <button
+        type="button"
         className="ml-4 whitespace-nowrap overflow-ellipsis overflow-hidden"
-        onClick={onOpen}
+        onClick={handleSelection}
       >
         {login}
-      </Link>
+      </button>
     </div>
   );
 });

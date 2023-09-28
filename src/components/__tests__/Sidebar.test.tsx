@@ -11,16 +11,6 @@ jest.mock('../../common/hooks/useSearchForUsers', () => ({
   ],
 }));
 
-const mockSearchParams = new Map();
-mockSearchParams.set('q', null);
-jest.mock('react-router-dom', () => {
-  const actual = jest.requireActual('react-router-dom');
-  return {
-    ...actual,
-    useSearchParams: () => [mockSearchParams],
-  };
-});
-
 describe('Sidebar', () => {
   it('should handle selection', () => {
     const mockHandleSelection = jest.fn();
@@ -34,7 +24,7 @@ describe('Sidebar', () => {
       ]
     );
 
-    userEvent.click(screen.getAllByRole('link')[0]);
+    userEvent.click(screen.getAllByRole('button')[0]);
 
     expect(mockHandleSelection).toHaveBeenCalled();
   });
@@ -60,15 +50,15 @@ describe('Sidebar', () => {
     expect(window.location.search).toEqual('?q=test');
 
     mockFetchResults.mockReset();
-    mockSearchParams.set('q', 'test');
+    window.location.search = '?q=test';
     userEvent.type(screen.getByRole('textbox'), '2');
     expect(mockFetchResults).toHaveBeenCalledWith('test2');
     expect(window.location.search).toEqual('?q=test2');
 
     mockFetchResults.mockReset();
-    mockSearchParams.set('q', 'test23');
+    window.location.search = '?q=test2';
     userEvent.type(screen.getByRole('textbox'), '3');
     expect(mockFetchResults).toHaveBeenCalledWith('test23');
-    expect(window.location.search).toEqual('?q=test2');
+    expect(window.location.search).toEqual('?q=test23');
   });
 });

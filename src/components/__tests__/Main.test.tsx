@@ -20,7 +20,7 @@ describe('Main', () => {
   it('should open sidebar when trigger is clicked', () => {
     renderWithRouter(<Main/>);
 
-    userEvent.click(screen.getByRole('button'));
+    userEvent.click(screen.getAllByRole('button')[0]);
 
     expect(screen.getByRole('complementary')).toHaveClass('translate-x-0');
   });
@@ -28,7 +28,7 @@ describe('Main', () => {
   it('should close sidebar when tapping on my view', () => {
     renderWithRouter(<Main/>);
 
-    userEvent.click(screen.getByRole('button'));
+    userEvent.click(screen.getAllByRole('button')[0]);
     userEvent.click(screen.getByRole('main'));
 
     expect(screen.getByRole('complementary')).not.toHaveClass('translate-x-0');
@@ -42,8 +42,8 @@ describe('Main', () => {
       }
     ]);
 
-    userEvent.click(screen.getByRole('button'));
-    userEvent.click(screen.getAllByRole('link')[0]);
+    userEvent.click(screen.getAllByRole('button')[0]);
+    userEvent.click(screen.getAllByRole('button')[1]);
 
     expect(screen.getByRole('complementary')).not.toHaveClass('translate-x-0');
   });

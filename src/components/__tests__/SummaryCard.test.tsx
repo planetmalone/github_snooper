@@ -27,7 +27,7 @@ describe('SummaryCard', () => {
         }
       ]
     );
-    userEvent.click(screen.getByRole('link'));
+    userEvent.click(screen.getByRole('button'));
 
     expect(screen.getByTestId('summary-card')).toBeInTheDocument();
   });
@@ -47,7 +47,7 @@ describe('SummaryCard', () => {
       ]
     );
 
-    userEvent.click(screen.getByRole('link'));
+    userEvent.click(screen.getByRole('button'));
 
     expect(mockHandleOpen).toHaveBeenCalled();
   });
