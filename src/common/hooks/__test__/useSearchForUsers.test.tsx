@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchForUsers } from '../useSearchForUsers';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { mockUsers } from '../../../test-utils';
 import userEvent from '@testing-library/user-event';
 
@@ -29,27 +29,29 @@ const TestComponent = () => {
 };
 
 describe('TestComponent', () => {
-  it('should fetch users from the api', () => {
+  it('should fetch users from the api', async () => {
     mockGetGitHubUsers.mockReturnValue(mockUsers);
 
     render(<TestComponent/>);
 
-    userEvent.type(screen.getByRole('textbox'), 'test');
+    userEvent.type(await screen.findByRole('textbox'), 'test');
     jest.runAllTimers();
 
-    expect(mockGetGitHubUsers).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(mockGetGitHubUsers).toHaveBeenCalledTimes(1);
+    });
   });
 
-  it('should fetch users from cache if available', () => {
+  it('should fetch users from cache if available', async () => {
     mockGetGitHubUsers.mockReturnValue(mockUsers);
 
     render(<TestComponent/>);
 
-    userEvent.type(screen.getByRole('textbox'), 'test');
+    userEvent.type(await screen.findByRole('textbox'), 'test');
     jest.runAllTimers();
-    userEvent.type(screen.getByRole('textbox'), '{backspace}');
+    userEvent.type(await screen.findByRole('textbox'), '{backspace}');
     jest.runAllTimers();
-    userEvent.type(screen.getByRole('textbox'), 'test');
+    userEvent.type(await screen.findByRole('textbox'), 'test');
 
     expect(mockGetGitHubUsers).toHaveBeenCalledTimes(2);
   });
