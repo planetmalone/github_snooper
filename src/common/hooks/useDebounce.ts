@@ -1,6 +1,6 @@
 import { DependencyList, useCallback, useEffect, useRef } from 'react';
 
-export const useDebounce = (fn: Function, delay: number, dependencies: DependencyList = []) => {
+export const useDebounce = (fn: Function, delay: number, dependencies: DependencyList) => {
   const timeout = useRef<ReturnType<typeof setTimeout>>();
   const callback = useRef(fn);
 
@@ -23,8 +23,6 @@ export const useDebounce = (fn: Function, delay: number, dependencies: Dependenc
   }, [fn]);
 
   return useCallback(() => {
-    if (timeout.current) {
-      clearTimeout(timeout.current);
-    }
+    clearTimeout(timeout.current);
   }, []);
 };

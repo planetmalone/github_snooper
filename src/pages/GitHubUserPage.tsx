@@ -6,7 +6,7 @@ import RepositoryCard from '../components/RepositoryCard';
 import GitHubUserInfo from '../components/GitHubUserInfo';
 import { useTitle } from '../common/hooks/useTitle';
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export async function loader({ params }: LoaderFunctionArgs<{ id: string; }>) {
   return getGitHubUser(params.id ?? '');
 }
 

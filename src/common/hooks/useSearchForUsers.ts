@@ -14,13 +14,13 @@ export const useSearchForUsers = (): [GitHubUserSummary[], (search: string, numb
   }
 
   useDebounce(async () => {
-    const lowerQuery = query ? query.toLowerCase() : query;
+    const lowerQuery = query.toLowerCase();
     if (!cachedSearch.has(lowerQuery)) {
       const users = await getGitHubUsers(lowerQuery, numResults);
-      updateCache(lowerQuery, users ?? []);
+      updateCache(lowerQuery, users);
     }
 
-    setUsers(cachedSearch.get(lowerQuery)! ?? []);
+    setUsers(cachedSearch.get(lowerQuery)!);
   }, 300, [query, numResults]);
 
   const fetchResults = (search: string, numberOfResults = 25) => {

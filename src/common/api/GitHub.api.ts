@@ -10,13 +10,17 @@ enum SearchType {
   User = 'USER',
 }
 
-export const getGitHubUsers = async (search: string, numberOfResults = 25): Promise<GitHubUserSummary[] | null> => {
+export const getGitHubUsers = async (search: string, numberOfResults = 25): Promise<GitHubUserSummary[]> => {
   if (!search) {
     return [];
   }
 
   const response = await graphql(searchQuery, { type: SearchType.User, search, numberOfResults });
   const json = await response?.json();
+  if (!json) {
+    return [];
+  }
+
   const users = json.data.search.nodes as GraphQlQueryResponseData;
   return users
     .filter((user: GitHubUser) => Boolean(user.login))
@@ -29,6 +33,10 @@ export const getGitHubUser = async (login: string): Promise<GitHubUser | null> =
   }
   const response = await graphql(userQuery, { login });
   const json = await response?.json();
+  if (!json) {
+    return null;
+  }
+
   return userMapper(json.data.user);
 };
 
@@ -49,6 +57,7 @@ const graphql = async (query: string, variables: { [key: string]: string | numbe
     });
   } catch (error) {
     handleGitHubError(error);
+    return null;
   }
 };
 
