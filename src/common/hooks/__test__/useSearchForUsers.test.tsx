@@ -53,6 +53,8 @@ describe('TestComponent', () => {
     jest.runAllTimers();
     userEvent.type(await screen.findByRole('textbox'), 'test');
 
-    expect(mockGetGitHubUsers).toHaveBeenCalledTimes(2);
+    await waitFor(() => {
+      expect(mockGetGitHubUsers).toHaveBeenCalledTimes(2);
+    });
   });
 });

@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import Main from '../Main';
 import { mockUsers, renderWithRouter } from '../../test-utils';
 import userEvent from '@testing-library/user-event';
@@ -17,24 +17,28 @@ describe('Main', () => {
     expect(screen.getByRole('complementary')).not.toHaveClass('translate-x-0');
   });
 
-  it('should open sidebar when trigger is clicked', () => {
+  it('should open sidebar when trigger is clicked', async () => {
     renderWithRouter(<Main/>);
 
     userEvent.click(screen.getAllByRole('button')[0]);
 
-    expect(screen.getByRole('complementary')).toHaveClass('translate-x-0');
+    await waitFor(() => {
+      expect(screen.getByRole('complementary')).toHaveClass('translate-x-0');
+    });
   });
 
-  it('should close sidebar when tapping on my view', () => {
+  it('should close sidebar when tapping on my view', async () => {
     renderWithRouter(<Main/>);
 
     userEvent.click(screen.getAllByRole('button')[0]);
     userEvent.click(screen.getByRole('main'));
 
-    expect(screen.getByRole('complementary')).not.toHaveClass('translate-x-0');
+    await waitFor(() => {
+      expect(screen.getByRole('complementary')).not.toHaveClass('translate-x-0');
+    });
   });
 
-  it('should close sidebar when tapping on user selection', () => {
+  it('should close sidebar when tapping on user selection', async () => {
     renderWithRouter(<Main/>, [
       {
         path: '/users/one',
@@ -45,6 +49,8 @@ describe('Main', () => {
     userEvent.click(screen.getAllByRole('button')[0]);
     userEvent.click(screen.getAllByRole('button')[1]);
 
-    expect(screen.getByRole('complementary')).not.toHaveClass('translate-x-0');
+    await waitFor(() => {
+      expect(screen.getByRole('complementary')).not.toHaveClass('translate-x-0');
+    });
   });
 });
