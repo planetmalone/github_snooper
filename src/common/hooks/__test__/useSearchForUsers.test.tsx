@@ -52,6 +52,7 @@ describe('TestComponent', () => {
     userEvent.type(await screen.findByRole('textbox'), '{backspace}');
     jest.runAllTimers();
     userEvent.type(await screen.findByRole('textbox'), 'test');
+    jest.runAllTimers();
 
     await waitFor(() => {
       expect(mockGetGitHubUsers).toHaveBeenCalledTimes(2);

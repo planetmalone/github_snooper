@@ -21,7 +21,6 @@ const Main = () => {
         <FaBars className="w-6 h-6" aria-hidden="true"/>
       </button>
       <aside
-        role="complementary"
         className={`${asideDefaultStyles} ${sidebarOpen ? 'translate-x-0' : ''}`}
       >
         <Sidebar onUserSelection={() => setSidebarOpen(false)}/>

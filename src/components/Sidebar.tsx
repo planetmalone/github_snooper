@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import GitHubUserList from './GitHubUserList';
 import SearchBar from './SearchBar';
 import { useSearchForUsers } from '../common/hooks/useSearchForUsers';
