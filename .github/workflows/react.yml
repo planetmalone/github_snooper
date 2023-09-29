@@ -37,7 +37,7 @@ jobs:
       uses: cypress-io/github-action@v5
       if: steps.check_cypress_tests.outputs.files_exists == 'true'
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REACT_APP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         build: npm run build --if-present
         start: npm start
