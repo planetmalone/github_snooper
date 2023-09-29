@@ -12,7 +12,7 @@ const GitHubUserErrorPage = () => {
         <FaGithub/>
         <div className="ml-3">404</div>
       </h1>
-      <h2 className="mb-8 lg:text-3xl">Oops! We had trouble trying to find {id}.</h2>
+      <h2 className="mb-8 lg:text-3xl text-center">Oops! We had trouble trying to find {id}.</h2>
       <p>Please make sure this person actually exists. If so, ask them why they're hiding from you.</p>
     </div>
   );
