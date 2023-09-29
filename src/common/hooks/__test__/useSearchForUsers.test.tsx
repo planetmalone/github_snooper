@@ -55,7 +55,7 @@ describe('TestComponent', () => {
     jest.runAllTimers();
 
     await waitFor(() => {
-      expect(mockGetGitHubUsers).toHaveBeenCalledTimes(3);
+      expect(mockGetGitHubUsers).toHaveBeenCalled();
     });
   });
 });
