@@ -1,3 +1,5 @@
+[![Build](https://github.com/planetmalone/github_snooper/actions/workflows/react.yml/badge.svg?branch=main)](https://github.com/planetmalone/github_snooper/actions/workflows/react.yml)
+
 # Front End Interview Project
 
 Hello! If you're reading this, that means you've passed our initial phone screen. Congrats! We're excited to get to know
