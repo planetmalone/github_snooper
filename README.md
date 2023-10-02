@@ -1,4 +1,4 @@
-[![Build](https://github.com/planetmalone/github_snooper/actions/workflows/react.yml/badge.svg?branch=main)](https://github.com/planetmalone/github_snooper/actions/workflows/react.yml)
+[![Main](https://github.com/planetmalone/github_snooper/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/planetmalone/github_snooper/actions/workflows/main.yml)
 # Welcome to GitHub Snooper!
 This repository showcases an application built with Remix. It uses the following technologies:
 1. Remix (React)
